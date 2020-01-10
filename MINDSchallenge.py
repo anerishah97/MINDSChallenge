@@ -28,7 +28,7 @@ for (monthNum,monthDays) in enumerate(daysOfMonths):
         else:
             month = str(monthNum+1)
         formattedDate = datetime.strptime(date + " " + month + " 2019", "%d %m %Y")
-        isoFormattedDate = formattedDate.isoformat()
+        isoFormattedDate = formattedDate.isoformat() + "+00:00"
         dict[isoFormattedDate] = 0
 #request the page source code
 res = requests.get("https://en.wikipedia.org/wiki/2019_in_spaceflight#Orbital_launches")
@@ -61,7 +61,7 @@ while start<len(allRows):
     
     #convert date to ISO format
     formattedDate = datetime.strptime(currentDate.split(' ')[0]+' '+ currentDate.split(' ')[1]+ ' 2019 00:00:00', '%d %B %Y %H:%M:%S')
-    isoFormatDate = formattedDate.isoformat()
+    isoFormatDate = formattedDate.isoformat() + "+00:00"
     #calculate the number of payloads for a single launch using rowspan
     numberOfLaunches = allRows[start].findAll('td')
     totalLoads = int(numberOfLaunches[0].get("rowspan")) 
